@@ -130,13 +130,13 @@
 
         // Firebase config
        const firebaseConfig = {
-  apiKey: "AIzaSyCxILU_su1_NtUsi3mbL28osfEcq31FG1Y",
-  authDomain: "class1-3e030.firebaseapp.com",
-  projectId: "class1-3e030",
-  storageBucket: "class1-3e030.appspot.com",
-  messagingSenderId: "112143951796",
-  appId: "1:112143951796:web:9b0cf84fe943a6a79634e1",
-  measurementId: "G-X24V8Y3S27"
+  apiKey: "AIzaSyBY9FlWRLumUwZxUcmXQaRHaV4_lc5Gv1Q",
+  authDomain: "class2-83bc1.firebaseapp.com",
+  projectId: "class2-83bc1",
+  storageBucket: "class2-83bc1.appspot.com",
+  messagingSenderId: "784188299721",
+  appId: "1:784188299721:web:e9622349b0f4fad8197018",
+  measurementId: "G-5GW188KDPD"
 };
 
         // Initialize Firebase
@@ -170,7 +170,7 @@
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
                     const messageClass = data.userName === currentUser.displayName ? 'my-message' : 'other-message';
-                    messagesContainer.innerHTML += <div class="message ${messageClass}"><strong>${data.userName}</strong>: ${data.text}</div>;
+                    messagesContainer.innerHTML += `<div class="message ${messageClass}"><strong>${data.userName}</strong>: ${data.text}</div>`;
                 });
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
             });
