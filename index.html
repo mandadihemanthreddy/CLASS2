@@ -35,11 +35,22 @@
             padding: 10px;
             border-bottom: 1px solid #ddd;
         }
+        .message-container {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 10px;
+        }
+        .profile-pic {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
         .message {
             padding: 10px;
             border-radius: 8px;
-            margin-bottom: 10px;
             max-width: 60%;
+            word-wrap: break-word;
         }
         .my-message {
             background-color: #d1e7dd;
@@ -170,7 +181,16 @@
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
                     const messageClass = data.userName === currentUser.displayName ? 'my-message' : 'other-message';
-                    messagesContainer.innerHTML += `<div class="message ${messageClass}"><strong>${data.userName}</strong>: ${data.text}</div>`;
+                    const profilePic = data.photoURL || 'https://via.placeholder.com/40'; // Default picture URL
+
+                    messagesContainer.innerHTML += `
+                        <div class="message-container ${messageClass}">
+                            <img src="${profilePic}" alt="Profile Picture" class="profile-pic">
+                            <div class="message">
+                                <strong>${data.userName}</strong>: ${data.text}
+                            </div>
+                        </div>
+                    `;
                 });
                 messagesContainer.scrollTop = messagesContainer.scrollHeight;
             });
@@ -189,6 +209,7 @@
                 await addDoc(collection(db, 'messages'), {
                     text: message,
                     userName: user.displayName,
+                    photoURL: user.photoURL, // Include photoURL
                     timestamp: new Date()
                 });
                 messageInput.value = '';
